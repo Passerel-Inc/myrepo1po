@@ -66,29 +66,15 @@ function r(l) {
 function getBalance(addr) {
 	// Get the address balance from blockchain.info
 	fetch("https://blockchain.info/q/addressbalance/" + addr)
-    .then(response => response.json())
-    .then(balance => {
-      // Format the balance as a fraction by dividing by 100,000,000
-      const formattedBalance = balance / 100000000;
-      console.log("Balance : " + balance);
-      // Get the current price of BTC from Coindesk API
-      fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
-        .then(response => response.json())
-        .then(data => {
-          // Get the BTC price in USD
-          const priceUSD = data.bpi.USD.rate_float;
-          
-          // Calculate the balance value in USD
-          const balanceValue = formattedBalance * priceUSD;
-          valeurBTC = balanceValue;
-          /* // Update the HTML in the DIVI text module
-          document.getElementById("textModuleId").innerHTML = `
-            Address balance: ${formattedBalance} BTC <br>
-            Current price of BTC: $${priceUSD} <br>
-            Balance value at current rate: $${balanceValue.toFixed(2)}
-          `; */
-        });
-    });
+	.then(function(response) {
+		return response.json();
+	})
+	.then(function(json) {
+		var btcBalance = parseInt(json, 10);
+		formattedBalance = btcBalance / 100000000;
+		valeurBTC = formattedBalance;
+		console.log("Balance inside function : " + valeurBTC);
+	});
 	return valeurBTC;
 }
 
