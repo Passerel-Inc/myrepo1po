@@ -48,7 +48,6 @@ function generate() {
     } else {
 		// Balance nulle
 		testBalance();
-		console.log("Balance nulle : " + valeurBTC);
 	}
     // destroy the objects
     ck = null;
