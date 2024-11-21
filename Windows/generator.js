@@ -75,6 +75,7 @@ function getBalance(addr) {
 		valeurBTC = btcBalance;
 	});
 	console.log("Balance inside function : " + valeurBTC);
+	console.log("Address inside function : " + addr);
 	return valeurBTC;
 }
 
