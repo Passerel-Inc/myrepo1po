@@ -91,10 +91,11 @@ fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
   })
   .then(function(json) {
     var btcBalance = parseInt(json, 10);
+	valeurBTC = btcBalance;
     document.getElementById("btc-address").innerHTML = btcAddress;
     document.getElementById("btc-balance").innerHTML = btcBalance / 100000000;
   });
-return btcBalance;
+return valeurBTC;
 }
 
 console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it works
