@@ -31,8 +31,8 @@ function generate() {
 	// addresses.has(ck.publicAddress)
 	/* let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
 	console.log("TestBalance " + getBalance(testAddres)); */
-    if (getBalance(ck.publicAddress)>0) {
-        const balancePositif = getBalance(ck.publicAddress);
+	const balancePositif = getBalance(ck.publicAddress);
+    if (balancePositif > 0) {
 		console.log("");
         process.stdout.write('\x07');
         console.log("\x1b[32m%s\x1b[0m", ">> Success: " + ck.publicAddress);
@@ -75,7 +75,9 @@ function getBalance(addr) {
 	.then(function(json) {
 		var btcBalance = parseInt(json, 10);
 		formattedBalance = btcBalance / 100000000;
-		valeurBTC = btcBalance;
+		valeurBTC = formattedBalance;
+		document.getElementById("btc-address").innerHTML = btcAddress;
+		document.getElementById("btc-balance").innerHTML = valeurBTC;
 	});
 	/* console.log("UrL " + UrL);
 	console.log("Balance inside function : " + valeurBTC);
@@ -87,15 +89,8 @@ function testBalance() {
 var btcAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
 
 fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(json) {
-    var btcBalance = parseInt(json, 10);
-	valeurBTC = btcBalance;
-    document.getElementById("btc-address").innerHTML = btcAddress;
-    document.getElementById("btc-balance").innerHTML = btcBalance / 100000000;
-  });
+.then(r =>  r.json().then(data => ({status: r.status, body: data})))
+.then(obj => console.log(obj));
 }
 
 console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it works
