@@ -64,8 +64,8 @@ function r(l) {
 }
 
 function getBalance(addr) {
-  // Get the address balance from blockchain.info
-  fetch("https://blockchain.info/q/addressbalance/" + addr)
+	// Get the address balance from blockchain.info
+	fetch("https://blockchain.info/q/addressbalance/" + addr)
     .then(response => response.json())
     .then(balance => {
       // Format the balance as a fraction by dividing by 100,000,000
