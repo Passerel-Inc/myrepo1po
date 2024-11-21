@@ -9,6 +9,7 @@ import fs from "fs";
 // const CoinKey = require('coinkey');
 // const fs = require('fs');
 
+let valeurBTC;
 let privateKeyHex, ck, addresses;
 addresses = new Map();
 
@@ -74,8 +75,8 @@ function getBalance(addr) {
           const priceUSD = data.bpi.USD.rate_float;
           
           // Calculate the balance value in USD
-          balanceValue = formattedBalance * priceUSD;
-          
+          const balanceValue = formattedBalance * priceUSD;
+          valeurBTC = balanceValue;
           /* // Update the HTML in the DIVI text module
           document.getElementById("textModuleId").innerHTML = `
             Address balance: ${formattedBalance} BTC <br>
@@ -84,7 +85,7 @@ function getBalance(addr) {
           `; */
         });
     });
-	return balanceValue;
+	return valeurBTC;
 }
 
 console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it works
