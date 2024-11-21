@@ -70,7 +70,7 @@ function getBalance(addr) {
     .then(balance => {
       // Format the balance as a fraction by dividing by 100,000,000
       const formattedBalance = balance / 100000000;
-      console.log("URL : " + formattedBalance);
+      console.log("Balance : " + balance);
       // Get the current price of BTC from Coindesk API
       fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
         .then(response => response.json())
