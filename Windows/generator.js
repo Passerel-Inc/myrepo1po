@@ -29,9 +29,9 @@ function generate() {
         
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
-	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
-	console.log("TestBalance " + getBalance(testAddres));
-    if(getBalance(ck.publicAddress)>0){
+	/* let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
+	console.log("TestBalance " + getBalance(testAddres)); */
+    if (getBalance(ck.publicAddress)>0) {
         const balancePositif = getBalance(ck.publicAddress);
 		console.log("");
         process.stdout.write('\x07');
@@ -45,7 +45,10 @@ function generate() {
             
         // close program after success
         process.exit();
-    }
+    } else {
+		// Balance nulle
+		
+	}
     // destroy the objects
     ck = null;
     privateKeyHex = null;
