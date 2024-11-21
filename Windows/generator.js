@@ -100,7 +100,7 @@ async function getBitcoinBalance(address) {
     // Extraire le solde de l'adresse
     const balance = data.data[address].address.balance / 100000000;
     
-    console.log(`Solde de l'adresse Bitcoin en BTC: ${balance} BTC`);
+console.log(`Solde de l'adresse Bitcoin en BTC: ${balance} BTC`);
     return balance;  // Le solde est en BTC (1 BTC = 100,000,000 satoshis)
     
   } catch (error) {
