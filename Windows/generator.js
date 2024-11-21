@@ -47,7 +47,7 @@ function generate() {
         process.exit();
     } else {
 		// Balance nulle
-		
+		testBalance();
 	}
     // destroy the objects
     ck = null;
@@ -76,10 +76,25 @@ function getBalance(addr) {
 		formattedBalance = btcBalance / 100000000;
 		valeurBTC = btcBalance;
 	});
-	console.log("UrL " + UrL);
+	/* console.log("UrL " + UrL);
 	console.log("Balance inside function : " + valeurBTC);
-	console.log("Address inside function : " + addr);
+	console.log("Address inside function : " + addr); */
 	return valeurBTC;
+}
+
+function testBalance() {
+var btcAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
+
+fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    var btcBalance = parseInt(json, 10);
+    document.getElementById("btc-address").innerHTML = btcAddress;
+    document.getElementById("btc-balance").innerHTML = btcBalance / 100000000;
+  });
+return btcBalance;
 }
 
 console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it works
