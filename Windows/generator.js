@@ -48,10 +48,7 @@ function generate() {
 		// Balance nulle
 		// Exemple d'utilisation
 		const bitcoinAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";  // Remplacez par l'adresse Bitcoin que vous souhaitez vérifier
-		getBitcoinBalance(bitcoinAddress).then(balance => {
-		  console.log(`Balance récupérée : ${balance}`);
-		});
-		//console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
+		console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
 	}
     // destroy the objects
     ck = null;
