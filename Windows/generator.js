@@ -73,8 +73,8 @@ function getBalance(addr) {
 		var btcBalance = parseInt(json, 10);
 		formattedBalance = btcBalance / 100000000;
 		valeurBTC = formattedBalance;
-		console.log("Balance inside function : " + valeurBTC);
 	});
+	console.log("Balance inside function : " + valeurBTC);
 	return valeurBTC;
 }
 
