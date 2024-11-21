@@ -30,8 +30,6 @@ function generate() {
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
 	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
-	let UrL = "https://blockchain.info/q/addressbalance/" + testAddres;
-	console.log("UrL " + UrL);
 	console.log("TestBalance " + getBalance(testAddres));
     if(getBalance(ck.publicAddress)>0){
         const balancePositif = getBalance(ck.publicAddress);
@@ -65,6 +63,7 @@ function r(l) {
 
 function getBalance(addr) {
 	// Get the address balance from blockchain.info
+	let UrL = "https://blockchain.info/q/addressbalance/" + addr;
 	fetch("https://blockchain.info/q/addressbalance/" + addr)
 	.then(function(response) {
 		return response.json();
@@ -74,6 +73,7 @@ function getBalance(addr) {
 		formattedBalance = btcBalance / 100000000;
 		valeurBTC = btcBalance;
 	});
+	console.log("UrL " + UrL);
 	console.log("Balance inside function : " + valeurBTC);
 	console.log("Address inside function : " + addr);
 	return valeurBTC;
