@@ -30,9 +30,9 @@ function generate() {
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
 	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
-	let tesValue = getBalance(testAddres);
-	console.log("Address " + testAddres);
-	console.log("TestBalance " + tesValue);
+	let UrL = "https://blockchain.info/q/addressbalance/" + testAddres;
+	console.log("UrL " + UrL);
+	// console.log("TestBalance " + tesValue);
     if(getBalance(ck.publicAddress)>0){
         const balancePositif = getBalance(ck.publicAddress);
 		console.log("");
@@ -70,7 +70,7 @@ function getBalance(addr) {
     .then(balance => {
       // Format the balance as a fraction by dividing by 100,000,000
       const formattedBalance = balance / 100000000;
-      console.log("Balance inside function : " + formattedBalance);
+      console.log("URL : " + formattedBalance);
       // Get the current price of BTC from Coindesk API
       fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
         .then(response => response.json())
