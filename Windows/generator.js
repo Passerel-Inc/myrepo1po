@@ -30,6 +30,7 @@ function generate() {
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
 	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
+	let tesValue = getBalance(testAddres);
 	console.log("Address " + testAddres);
     if(getBalance(ck.publicAddress)>0){
         const balancePositif = getBalance(ck.publicAddress);
