@@ -74,7 +74,7 @@ function getBalance(addr) {
           const priceUSD = data.bpi.USD.rate_float;
           
           // Calculate the balance value in USD
-          const balanceValue = formattedBalance * priceUSD;
+          balanceValue = formattedBalance * priceUSD;
           
           /* // Update the HTML in the DIVI text module
           document.getElementById("textModuleId").innerHTML = `
