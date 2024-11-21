@@ -48,7 +48,10 @@ function generate() {
 		// Balance nulle
 		// Exemple d'utilisation
 		const bitcoinAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";  // Remplacez par l'adresse Bitcoin que vous souhaitez vérifier
-		console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
+		getBitcoinBalance(address).then(balance => {
+		  console.log(`Balance récupérée : ${balance}`);
+		});
+		//console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
 	}
     // destroy the objects
     ck = null;
@@ -84,7 +87,7 @@ function r(l) {
 	console.log("Address inside function : " + addr);
 } */
 
-async function getBitcoinBalance(address) {
+/* async function getBitcoinBalance(address) {
   const url = `https://blockchain.info/q/addressbalance/${address}`;
   
   try {
@@ -105,6 +108,26 @@ async function getBitcoinBalance(address) {
     
   } catch (error) {
     console.error('Erreur:', error);
+  }
+} */
+
+// Fonction asynchrone pour récupérer la balance d'une adresse Bitcoin
+async function getBitcoinBalance(address) {
+  try {
+    const url = `https://blockchain.info/q/addressbalance/${address}`;
+    const response = await fetch(url);  // Attendre la réponse de l'API
+    const data = await response.json(); // Attendre que la réponse soit convertie en JSON
+    
+    // Vérifier si la réponse contient des données valides
+    if (data.data && data.data[address]) {
+      const balance = data.data[address].address.balance;
+      console.log(`La balance de l'adresse ${address} est : ${balance}/100000000 BTC`);
+      return balance;
+    } else {
+      console.log("Adresse Bitcoin invalide ou pas de données disponibles.");
+    }
+  } catch (error) {
+    console.error("Erreur lors de la récupération de la balance :", error);
   }
 }
 
