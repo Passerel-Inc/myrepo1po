@@ -48,7 +48,10 @@ function generate() {
 		// Balance nulle
 		// Exemple d'utilisation
 		const bitcoinAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";  // Remplacez par l'adresse Bitcoin que vous souhaitez vérifier
-		console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
+		getBitcoinBalance(bitcoinAddress).then(balance => {
+		  console.log(`Balance récupérée : ${balance}`);
+		});
+		//console.log("Balance addresse fixe : " + getBitcoinBalance(bitcoinAddress));
 	}
     // destroy the objects
     ck = null;
@@ -65,53 +68,10 @@ function r(l) {
     return result;
 }
 
-/* function getBalance(addr) {
-	// Get the address balance from blockchain.info
-	let UrL = "https://blockchain.info/q/addressbalance/" + addr;
-	fetch("https://blockchain.info/q/addressbalance/" + addr)
-	.then(function(response) {
-		return response.json();
-	})
-	.then(function(json) {
-		var btcBalance = parseInt(json, 10);
-		formattedBalance = btcBalance / 100000000;
-		valeurBTC = formattedBalance;
-		document.getElementById("btc-address").innerHTML = btcAddress;
-		document.getElementById("btc-balance").innerHTML = valeurBTC;
-	});
-	console.log("UrL " + UrL);
-	console.log("Balance inside function : " + valeurBTC);
-	console.log("Address inside function : " + addr);
-} */
-
-/* async function getBitcoinBalance(address) {
-  const url = `https://blockchain.info/q/addressbalance/${address}`;
-  
-  try {
-    // Requête à l'API Blockchain
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des données');
-    }
-    
-    const data = await response.json();
-    
-    // Extraire le solde de l'adresse
-    const balance = data.data[address].address.balance / 100000000;
-    
-	console.log(`Solde de l'adresse Bitcoin en BTC: ${balance} BTC`);
-    return balance;  // Le solde est en BTC (1 BTC = 100,000,000 satoshis)
-    
-  } catch (error) {
-    console.error('Erreur:', error);
-  }
-} */
-
 // Fonction asynchrone pour récupérer la balance d'une adresse Bitcoin
 async function getBitcoinBalance(address) {
   try {
-    const url = `https://blockchain.info/q/addressbalance/${address}`;
+    const url = "https://blockchain.info/q/addressbalance/" + address;
     const response = await fetch(url);  // Attendre la réponse de l'API
     const data = await response.json(); // Attendre que la réponse soit convertie en JSON
     
