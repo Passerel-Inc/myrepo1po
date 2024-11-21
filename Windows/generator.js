@@ -32,7 +32,7 @@ function generate() {
 	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
 	let UrL = "https://blockchain.info/q/addressbalance/" + testAddres;
 	console.log("UrL " + UrL);
-	// console.log("TestBalance " + tesValue);
+	console.log("TestBalance " + getBalance(testAddres));
     if(getBalance(ck.publicAddress)>0){
         const balancePositif = getBalance(ck.publicAddress);
 		console.log("");
