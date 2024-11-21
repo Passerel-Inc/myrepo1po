@@ -2,14 +2,14 @@
 
 import fetch from "node-fetch";
 
-process.title = "Bitcoin Stealer by Michal2SAB";
+process.title = "Bitcoin Checker";
 
 import CoinKey from "coinkey";
 import fs from "fs";
+
 // const CoinKey = require('coinkey');
 // const fs = require('fs');
 
-let valeurBTC;
 let privateKeyHex, ck, addresses;
 addresses = new Map();
 
@@ -29,9 +29,8 @@ function generate() {
         
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
-	/* let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
-	console.log("TestBalance " + getBalance(testAddres)); */
-	const balancePositif = getBalance(ck.publicAddress);
+
+	const balancePositif = getBitcoinBalance(ck.publicAddress);
     if (balancePositif > 0) {
 		console.log("");
         process.stdout.write('\x07');
@@ -47,7 +46,9 @@ function generate() {
         process.exit();
     } else {
 		// Balance nulle
-		testBalance();
+		// Exemple d'utilisation
+		const bitcoinAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";  // Remplacez par l'adresse Bitcoin que vous souhaitez vérifier
+		getBitcoinBalance(bitcoinAddress);
 	}
     // destroy the objects
     ck = null;
@@ -64,7 +65,7 @@ function r(l) {
     return result;
 }
 
-function getBalance(addr) {
+/* function getBalance(addr) {
 	// Get the address balance from blockchain.info
 	let UrL = "https://blockchain.info/q/addressbalance/" + addr;
 	fetch("https://blockchain.info/q/addressbalance/" + addr)
@@ -78,18 +79,33 @@ function getBalance(addr) {
 		document.getElementById("btc-address").innerHTML = btcAddress;
 		document.getElementById("btc-balance").innerHTML = valeurBTC;
 	});
-	/* console.log("UrL " + UrL);
+	console.log("UrL " + UrL);
 	console.log("Balance inside function : " + valeurBTC);
-	console.log("Address inside function : " + addr); */
-	return valeurBTC;
-}
+	console.log("Address inside function : " + addr);
+} */
 
-function testBalance() {
-var btcAddress = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
-
-fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
-.then(r =>  r.json().then(data => ({status: r.status, body: data})))
-.then(obj => console.log(obj));
+async function getBitcoinBalance(address) {
+  const url = `https://blockchain.info/q/addressbalance/${address}`;
+  
+  try {
+    // Requête à l'API Blockchain
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error('Erreur lors de la récupération des données');
+    }
+    
+    const data = await response.json();
+    
+    // Extraire le solde de l'adresse
+    const balance = data.data[address].address.balance / 100000000;
+    
+    console.log(`Solde de l'adresse Bitcoin en BTC: ${balance} BTC`);
+    return balance;  // Le solde est en BTC (1 BTC = 100,000,000 satoshis)
+    
+  } catch (error) {
+    console.error('Erreur:', error);
+  }
 }
 
 console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it works
