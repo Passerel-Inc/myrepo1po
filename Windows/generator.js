@@ -32,6 +32,7 @@ function generate() {
 	let testAddres = "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF";
 	let tesValue = getBalance(testAddres);
 	console.log("Address " + testAddres);
+	console.log("TestBalance " + tesValue);
     if(getBalance(ck.publicAddress)>0){
         const balancePositif = getBalance(ck.publicAddress);
 		console.log("");
