@@ -12,6 +12,7 @@ import fs from "fs";
 
 let privateKeyHex, ck, addresses;
 addresses = new Map();
+let balancePositif;
 
 /* const data = fs.readFileSync('./riches.txt');
 data.toString().split("\n").forEach(address => addresses.set(address, true)); */
@@ -30,8 +31,7 @@ function generate() {
     // if generated wallet matches any from the riches.txt file, tell us we won!
 	// addresses.has(ck.publicAddress)
 
-	const balancePositif = getBitcoinBalance(ck.publicAddress);
-    if (balancePositif > 0) {
+    if (getBitcoinBalance(ck.publicAddress) > 0) {
 		console.log("");
         process.stdout.write('\x07');
         console.log("\x1b[32m%s\x1b[0m", ">> Success: " + ck.publicAddress);
@@ -78,6 +78,7 @@ async function getBitcoinBalance(address) {
     // Vérifier si la réponse contient des données valides
     if (data.data && data.data[address]) {
       const balance = data.data[address].address.balance;
+	  balancePositif = balance / 100000000
       console.log(`La balance de l'adresse ${address} est : ${balance}/100000000 BTC`);
       return balance;
     } else {
